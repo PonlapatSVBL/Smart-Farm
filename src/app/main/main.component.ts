@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { SensorService } from '../services/sensor.service';
+
+/* import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+import { getAnalytics } from "@angular/fire/analytics"; */
 
 @Component({
   selector: 'app-main',
@@ -190,14 +194,31 @@ export class MainComponent implements OnInit {
     }
   ];
 
+  ledPower = 75
+  shutterDegree = 35
   timeStart
   timeStop
   valueTimer = 30
+  presetSelect
+  presetNameSelect
 
-  constructor() { }
+  constructor(
+    private _sensorService: SensorService,
+  ) {
+    this._sensorService.getAll().subscribe(resp => {
+      console.log(resp)
+    })
+  }
 
   ngOnInit(): void {
+  }
 
+  changePreset(event) {
+    this.nodes.find(p => {
+      if (p.key === event) {
+        this.presetNameSelect = p.title
+      }
+    })
   }
 
 }

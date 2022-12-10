@@ -11,25 +11,25 @@
                         <mat-tab label="Dashboard">
                                 <div fxFlex fxLayout="column" style="margin-top: 20px;">
                                         <div fxFlex style="margin-left: 50px;">
-                                                <label><strong>Preset : ??????</strong></label>
+                                                <label><strong>Preset : {{ presetNameSelect }}</strong></label>
                                         </div>
 
                                         <!-- @Circle Progress -->
                                         <div fxLayout="row" fxLayoutAlign="center start" style="margin-top: 20px;">
                                                 <div fxLayout="column" style="margin: 0px 15px;">
                                                         <label style="margin-bottom: 10px;">
-                                                                <b>LED Power (75%)</b>
+                                                                <b>LED Power ({{ ledPower }}%)</b>
                                                         </label>
-                                                        <nz-progress [nzPercent]="75" nzType="circle"
+                                                        <nz-progress [nzPercent]="ledPower" nzType="circle"
                                                                 [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
                                                         </nz-progress>
                                                 </div>
 
                                                 <div fxLayout="column" style="margin: 0px 15px;">
                                                         <label style="margin-bottom: 10px;">
-                                                                <b>Shutter Degree (35°)</b>
+                                                                <b>Shutter Degree ({{ shutterDegree }}°)</b>
                                                         </label>
-                                                        <nz-progress [nzPercent]="35" nzType="circle"
+                                                        <nz-progress [nzPercent]="shutterDegree" nzType="circle"
                                                                 [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
                                                         </nz-progress>
                                                 </div>
@@ -121,6 +121,8 @@
                                                 </label>
                                                 <nz-tree-select
                                                         [nzNodes]="nodes"
+                                                        [(ngModel)]="presetSelect"
+                                                        (ngModelChange)="changePreset($event)"
                                                         nzShowSearch nzPlaceHolder="Please select"
                                                         style="min-width: 300px; max-width: 500px;">
                                                 </nz-tree-select>

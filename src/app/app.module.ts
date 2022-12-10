@@ -23,6 +23,15 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
+/* import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database'; */
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+import { environment } from 'src/environments/environment';
+
+
 registerLocaleData(en);
 
 @NgModule({
@@ -45,8 +54,17 @@ registerLocaleData(en);
     NzSliderModule,
     NzTreeSelectModule,
     NzTimePickerModule,
+
+    /* AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule, */
+
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
