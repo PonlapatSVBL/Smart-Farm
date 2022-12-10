@@ -15,6 +15,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChartsModule } from 'ng2-charts';
 /* import { ChartsModule } from 'ng2-charts/lib/charts.module'; */
 
+import { MatTabsModule } from '@angular/material/tabs';
+
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+
 registerLocaleData(en);
 
 @NgModule({
@@ -29,7 +37,14 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     FlexLayoutModule,
-    ChartsModule
+    ChartsModule,
+    MatTabsModule,
+
+    NzProgressModule,
+    NzCheckboxModule,
+    NzSliderModule,
+    NzTreeSelectModule,
+    NzTimePickerModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

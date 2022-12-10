@@ -77,11 +77,127 @@ export class MainComponent implements OnInit {
   }
 
 
+  nodes = [
+    {
+      title: 'ว่านหางจระเข้',
+      key: '0',
+      isLeaf: true,
+    },
+    {
+      title: 'หน้าวัว',
+      key: '1',
+      isLeaf: true,
+    },
+    {
+      title: 'อะโวคาโด',
+      key: '2',
+      isLeaf: true,
+    },
+    {
+      title: 'โหระพา',
+      key: '3',
+      isLeaf: true,
+    },
+    {
+      title: 'แบล็กเบอร์รี่',
+      key: '4',
+      isLeaf: true,
+    },
+    {
+      title: 'บลูเบอร์รี่',
+      key: '5',
+      isLeaf: true,
+    },
+    {
+      title: 'บรอกโคลี',
+      key: '6',
+      isLeaf: true,
+    },
+    {
+      title: 'วงศ์สับปะรด',
+      key: '7',
+      isLeaf: true,
+    },
+    {
+      title: 'คล้า',
+      key: '8',
+      isLeaf: true,
+    },
+    {
+      title: 'กัญชา (ระยะออกดอก)',
+      key: '9',
+      isLeaf: true,
+    },
+    {
+      title: 'กัญชา (ระยะเพาะเมล็ด)',
+      key: '10',
+      isLeaf: true,
+    },
+    {
+      title: 'กัญชา (ระยะการเจริญเติบโตทางลำต้นและใบ)',
+      key: '11',
+      isLeaf: true,
+    },
+    {
+      title: 'เบญจมาศ',
+      key: '12',
+      isLeaf: true,
+    },
+    {
+      title: 'ผักชี',
+      key: '13',
+      isLeaf: true,
+    },
+    {
+      title: 'สกุลเปล้า',
+      key: '14',
+      isLeaf: true,
+    },
+    {
+      title: 'แตงกวา',
+      key: '15',
+      isLeaf: true,
+    },
+    {
+      title: 'พืชสวนครัว (ขนาดเล็ก)',
+      key: '16',
+      isLeaf: true,
+    },
+    {
+      title: 'กระบองเพชรทะเลทราย',
+      key: '17',
+      isLeaf: true,
+    },
+    {
+      title: 'ผักชีลาว',
+      key: '18',
+      isLeaf: true,
+    },
+    {
+      title: 'ผักกาดหอม',
+      key: '19',
+      isLeaf: true,
+    },
+    {
+      title: 'พริก',
+      key: '20',
+      isLeaf: true,
+    },
+    {
+      title: 'มะเขือเทศ',
+      key: '21',
+      isLeaf: true
+    }
+  ];
 
+  timeStart
+  timeStop
+  valueTimer = 30
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

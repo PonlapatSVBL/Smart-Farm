@@ -1,20 +1,133 @@
-<p>main works!</p>
-
-<div id="main">
+<div id="main" fxFlex>
         <div class="header">
-                <div style="display: block;" class="chart">
-                        <canvas baseChart [datasets]="labelMFL"
-                                [labels]="lineChartLabels"
-                                [options]="lineChartOptions"
-                                [chartType]="ChartType"
-                                (chartHover)="chartHovered($event)"
-                                (chartClick)="chartClicked($event)">
-                        </canvas>
+                <div fxLayoutAlign="center center">
+                        <h1><strong>Smart Farm</strong></h1>
                 </div>
-
         </div>
 
         <div class="content">
+                <mat-tab-group>
+                        <!-- @Dashboard -->
+                        <mat-tab label="Dashboard">
+                                <div fxFlex fxLayout="column" style="margin-top: 20px;">
+                                        <div fxFlex style="margin-left: 50px;">
+                                                <label><strong>Preset : ??????</strong></label>
+                                        </div>
 
+                                        <!-- @Circle Progress -->
+                                        <div fxLayout="row" fxLayoutAlign="center start" style="margin-top: 20px;">
+                                                <div fxLayout="column" style="margin: 0px 15px;">
+                                                        <label style="margin-bottom: 10px;">
+                                                                <b>LED Power (75%)</b>
+                                                        </label>
+                                                        <nz-progress [nzPercent]="75" nzType="circle"
+                                                                [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
+                                                        </nz-progress>
+                                                </div>
+
+                                                <div fxLayout="column" style="margin: 0px 15px;">
+                                                        <label style="margin-bottom: 10px;">
+                                                                <b>Shutter Degree (35°)</b>
+                                                        </label>
+                                                        <nz-progress [nzPercent]="35" nzType="circle"
+                                                                [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
+                                                        </nz-progress>
+                                                </div>
+                                        </div>
+
+                                        <!-- @Chart -->
+                                        <div fxFlex fxLayout="row" fxLayoutAlign="space-around start"
+                                                style="margin-top: 20px;">
+                                                <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                        style="width: 45%;">
+                                                        <label>
+                                                                <b>PPFD : ? (μmol/m2/s)</b>
+                                                        </label>
+                                                        <div style="width: 100%;">
+                                                                <canvas baseChart [datasets]="labelMFL"
+                                                                        [labels]="lineChartLabels"
+                                                                        [options]="lineChartOptions"
+                                                                        [chartType]="ChartType"
+                                                                        (chartHover)="chartHovered($event)"
+                                                                        (chartClick)="chartClicked($event)">
+                                                                </canvas>
+                                                        </div>
+                                                </div>
+
+                                                <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                        style="width: 45%;">
+                                                        <label>
+                                                                <b>PPFD : ? (μmol/m2/s)</b>
+                                                        </label>
+                                                        <div style="width: 100%;">
+                                                                <canvas baseChart [datasets]="labelMFL"
+                                                                        [labels]="lineChartLabels"
+                                                                        [options]="lineChartOptions"
+                                                                        [chartType]="ChartType"
+                                                                        (chartHover)="chartHovered($event)"
+                                                                        (chartClick)="chartClicked($event)">
+                                                                </canvas>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </mat-tab>
+
+                        <!-- @Config -->
+                        <mat-tab label="Config">
+                                <div fxFlex fxLayout="column" fxLayoutAlign="start start" style="margin: 20px 50px 0px 50px;">
+                                        <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
+                                                <label style="margin-right: 10px;">
+                                                        <strong>Days : </strong>
+                                                </label>
+                                                <label nz-checkbox>Monday</label>
+                                                <label nz-checkbox>Tuesday</label>
+                                                <label nz-checkbox>Wednesday</label>
+                                                <label nz-checkbox>Thursday</label>
+                                                <label nz-checkbox>Friday</label>
+                                                <label nz-checkbox>Saturday</label>
+                                                <label nz-checkbox>Sunday</label>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
+                                                <label style="margin-right: 10px;">
+                                                        <strong>Timer start : </strong>
+                                                </label>
+                                                <nz-time-picker [(ngModel)]="timeStart" nzFormat="HH:mm"></nz-time-picker>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
+                                                <label style="margin-right: 10px;">
+                                                        <strong>Timer stop : </strong>
+                                                </label>
+                                                <nz-time-picker [(ngModel)]="timeStop" nzFormat="HH:mm"></nz-time-picker>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
+                                                <label style="margin-right: 10px;">
+                                                        <strong>Timer : {{ valueTimer }} min</strong>
+                                                </label>
+                                                <nz-slider
+                                                        [(ngModel)]="valueTimer"
+                                                        [nzMin]="1"
+                                                        [nzMax]="120"
+                                                        style="min-width: 300px; max-width: 500px;">
+                                                </nz-slider>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
+                                                <label style="margin-right: 10px;">
+                                                        <strong>Preset : </strong>
+                                                </label>
+                                                <nz-tree-select
+                                                        [nzNodes]="nodes"
+                                                        nzShowSearch nzPlaceHolder="Please select"
+                                                        style="min-width: 300px; max-width: 500px;">
+                                                </nz-tree-select>
+                                        </div>
+
+                                </div>
+                        </mat-tab>
+                </mat-tab-group>
         </div>
 </div>
