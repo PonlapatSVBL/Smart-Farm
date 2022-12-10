@@ -1,0 +1,20 @@
+<p>main works!</p>
+
+<div id="main">
+        <div class="header">
+                <div style="display: block;" class="chart">
+                        <canvas baseChart [datasets]="labelMFL"
+                                [labels]="lineChartLabels"
+                                [options]="lineChartOptions"
+                                [chartType]="ChartType"
+                                (chartHover)="chartHovered($event)"
+                                (chartClick)="chartClicked($event)">
+                        </canvas>
+                </div>
+
+        </div>
+
+        <div class="content">
+
+        </div>
+</div>
