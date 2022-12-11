@@ -41,12 +41,15 @@
                                                 <div fxFlex fxLayout="column" fxLayoutAlign="start center"
                                                         style="width: 45%;">
                                                         <label>
-                                                                <b>PPFD : ? (μmol/m2/s)</b>
+                                                                <b>PPFD : {{ ppfd1st }} (μmol/m2/s)</b>
                                                         </label>
                                                         <div style="width: 100%;">
-                                                                <canvas baseChart [datasets]="labelMFL"
-                                                                        [labels]="lineChartLabels"
-                                                                        [options]="lineChartOptions"
+                                                                <canvas baseChart
+                                                                        [datasets]="ChartData1st"
+                                                                        [labels]="ChartLabels"
+                                                                        [options]="ChartOptions"
+                                                                        [colors]="ChartColors1st"
+                                                                        [legend]="ChartLegend"
                                                                         [chartType]="ChartType"
                                                                         (chartHover)="chartHovered($event)"
                                                                         (chartClick)="chartClicked($event)">
@@ -57,12 +60,15 @@
                                                 <div fxFlex fxLayout="column" fxLayoutAlign="start center"
                                                         style="width: 45%;">
                                                         <label>
-                                                                <b>PPFD : ? (μmol/m2/s)</b>
+                                                                <b>PPFD : {{ ppfd2nd }} (μmol/m2/s)</b>
                                                         </label>
                                                         <div style="width: 100%;">
-                                                                <canvas baseChart [datasets]="labelMFL"
-                                                                        [labels]="lineChartLabels"
-                                                                        [options]="lineChartOptions"
+                                                                <canvas baseChart
+                                                                        [datasets]="ChartData2nd"
+                                                                        [labels]="ChartLabels"
+                                                                        [options]="ChartOptions"
+                                                                        [colors]="ChartColors2nd"
+                                                                        [legend]="ChartLegend"
                                                                         [chartType]="ChartType"
                                                                         (chartHover)="chartHovered($event)"
                                                                         (chartClick)="chartClicked($event)">
@@ -105,10 +111,11 @@
 
                                         <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
                                                 <label style="margin-right: 10px;">
-                                                        <strong>Timer : {{ valueTimer }} min</strong>
+                                                        <strong>Time Delay : {{ valueTimer }} min</strong>
                                                 </label>
                                                 <nz-slider
                                                         [(ngModel)]="valueTimer"
+                                                        (ngModelChange)="setTimerDelay($event)"
                                                         [nzMin]="1"
                                                         [nzMax]="120"
                                                         style="min-width: 300px; max-width: 500px;">
@@ -122,6 +129,7 @@
                                                 <nz-tree-select
                                                         [nzNodes]="nodes"
                                                         [(ngModel)]="presetSelect"
+                                                        (ngModelChange)="setPreset($event)"
                                                         (ngModelChange)="changePreset($event)"
                                                         nzShowSearch nzPlaceHolder="Please select"
                                                         style="min-width: 300px; max-width: 500px;">
