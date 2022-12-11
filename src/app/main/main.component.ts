@@ -33,6 +33,10 @@ export class MainComponent implements OnInit {
   valueTimer = 30
   presetSelect
   presetNameSelect
+  presetPPFDSelect
+
+  formatPercent = (percent: number) => `${percent}%`;
+  formatDegree = (percent: number) => `${percent}°`;
 
   conversion_factor = 0.00508
 
@@ -92,113 +96,135 @@ export class MainComponent implements OnInit {
       title: 'ว่านหางจระเข้',
       key: 0,
       isLeaf: true,
+      ppfd: 120,
     },
     {
       title: 'หน้าวัว',
       key: 1,
       isLeaf: true,
+      ppfd: 240,
     },
     {
       title: 'อะโวคาโด',
       key: 2,
       isLeaf: true,
+      ppfd: 525,
     },
     {
       title: 'โหระพา',
       key: 3,
       isLeaf: true,
+      ppfd: 360,
     },
     {
       title: 'แบล็กเบอร์รี่',
       key: 4,
       isLeaf: true,
+      ppfd: 250,
     },
     {
       title: 'บลูเบอร์รี่',
       key: 5,
       isLeaf: true,
+      ppfd: 550,
     },
     {
       title: 'บรอกโคลี',
       key: 6,
       isLeaf: true,
+      ppfd: 500,
     },
     {
       title: 'วงศ์สับปะรด',
       key: 7,
       isLeaf: true,
+      ppfd: 340,
     },
     {
       title: 'คล้า',
       key: 8,
       isLeaf: true,
+      ppfd: 240,
     },
     {
       title: 'กัญชา (ระยะออกดอก)',
       key: 9,
       isLeaf: true,
+      ppfd: 775,
     },
     {
       title: 'กัญชา (ระยะเพาะเมล็ด)',
       key: 10,
       isLeaf: true,
+      ppfd: 200,
     },
     {
       title: 'กัญชา (ระยะการเจริญเติบโตทางลำต้นและใบ)',
       key: 11,
       isLeaf: true,
+      ppfd: 425,
     },
     {
       title: 'เบญจมาศ',
       key: 12,
       isLeaf: true,
+      ppfd: 250,
     },
     {
       title: 'ผักชี',
       key: 13,
       isLeaf: true,
+      ppfd: 450,
     },
     {
       title: 'สกุลเปล้า',
       key: 14,
       isLeaf: true,
+      ppfd: 120,
     },
     {
       title: 'แตงกวา',
       key: 15,
       isLeaf: true,
+      ppfd: 450,
     },
     {
       title: 'พืชสวนครัว (ขนาดเล็ก)',
       key: 16,
       isLeaf: true,
+      ppfd: 200,
     },
     {
       title: 'กระบองเพชรทะเลทราย',
       key: 17,
       isLeaf: true,
+      ppfd: 1250,
     },
     {
       title: 'ผักชีลาว',
       key: 18,
       isLeaf: true,
+      ppfd: 450,
     },
     {
       title: 'ผักกาดหอม',
       key: 19,
       isLeaf: true,
+      ppfd: 300,
     },
     {
       title: 'พริก',
       key: 20,
       isLeaf: true,
+      ppfd: 450,
     },
     {
       title: 'มะเขือเทศ',
       key: 21,
-      isLeaf: true
+      isLeaf: true,
+      ppfd: 575,
     }
-  ];
+  ]
 
   constructor(
     private _sensorService: SensorService,
@@ -269,6 +295,7 @@ export class MainComponent implements OnInit {
     this.nodes.find(p => {
       if (p.key === event) {
         this.presetNameSelect = p.title
+        this.presetPPFDSelect = p.ppfd
       }
     })
   }
@@ -300,8 +327,9 @@ export class MainComponent implements OnInit {
   }
 
   setPreset(e) {
-    this._sensorService.setPreset(e)
-    this._sensorService.setPPFD(e * 20)
+    let pres = this.nodes.find(p => p.key === e)
+    this._sensorService.setPreset(pres.key)
+    this._sensorService.setPPFD(pres.ppfd)
   }
 
   chartClicked(e: any): void {

@@ -12,7 +12,7 @@
                                 <div fxFlex fxLayout="column" style="margin-top: 20px;">
                                         <div fxFlex style="margin-left: 50px;">
                                                 <label style="font-size: 17px;">
-                                                        <strong>Preset : {{ presetNameSelect }}</strong>
+                                                        <strong>Preset : {{ presetNameSelect }} ({{ presetPPFDSelect }} PPFD)</strong>
                                                 </label>
                                         </div>
 
@@ -22,7 +22,10 @@
                                                         <label style="margin-bottom: 10px;">
                                                                 <b>LED Power ({{ ledPower }}%)</b>
                                                         </label>
-                                                        <nz-progress [nzPercent]="ledPower" nzType="circle"
+                                                        <nz-progress
+                                                                [nzPercent]="ledPower"
+                                                                nzType="circle"
+                                                                [nzFormat]="formatPercent"
                                                                 [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
                                                         </nz-progress>
                                                 </div>
@@ -31,7 +34,10 @@
                                                         <label style="margin-bottom: 10px;">
                                                                 <b>Shutter Degree ({{ shutterDegree }}°)</b>
                                                         </label>
-                                                        <nz-progress [nzPercent]="shutterDegree" nzType="circle"
+                                                        <nz-progress
+                                                                [nzPercent]="shutterDegree"
+                                                                nzType="circle"
+                                                                [nzFormat]="formatDegree"
                                                                 [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
                                                         </nz-progress>
                                                 </div>
