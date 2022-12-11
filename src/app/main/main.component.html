@@ -11,7 +11,9 @@
                         <mat-tab label="Dashboard">
                                 <div fxFlex fxLayout="column" style="margin-top: 20px;">
                                         <div fxFlex style="margin-left: 50px;">
-                                                <label><strong>Preset : {{ presetNameSelect }}</strong></label>
+                                                <label style="font-size: 17px;">
+                                                        <strong>Preset : {{ presetNameSelect }}</strong>
+                                                </label>
                                         </div>
 
                                         <!-- @Circle Progress -->
@@ -86,27 +88,35 @@
                                                 <label style="margin-right: 10px;">
                                                         <strong>Days : </strong>
                                                 </label>
-                                                <label nz-checkbox>Monday</label>
-                                                <label nz-checkbox>Tuesday</label>
-                                                <label nz-checkbox>Wednesday</label>
-                                                <label nz-checkbox>Thursday</label>
-                                                <label nz-checkbox>Friday</label>
-                                                <label nz-checkbox>Saturday</label>
-                                                <label nz-checkbox>Sunday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.mon" (ngModelChange)="changeDay()">Monday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.tue" (ngModelChange)="changeDay()">Tuesday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.wed" (ngModelChange)="changeDay()">Wednesday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.thu" (ngModelChange)="changeDay()">Thursday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.fri" (ngModelChange)="changeDay()">Friday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.sat" (ngModelChange)="changeDay()">Saturday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.sun" (ngModelChange)="changeDay()">Sunday</label>
                                         </div>
 
                                         <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
                                                 <label style="margin-right: 10px;">
                                                         <strong>Timer start : </strong>
                                                 </label>
-                                                <nz-time-picker [(ngModel)]="timeStart" nzFormat="HH:mm"></nz-time-picker>
+                                                <nz-time-picker
+                                                        [(ngModel)]="timeStart"
+                                                        (ngModelChange)="changeTimeStart($event)"
+                                                        nzFormat="HH:mm">
+                                                </nz-time-picker>
                                         </div>
 
                                         <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
                                                 <label style="margin-right: 10px;">
                                                         <strong>Timer stop : </strong>
                                                 </label>
-                                                <nz-time-picker [(ngModel)]="timeStop" nzFormat="HH:mm"></nz-time-picker>
+                                                <nz-time-picker
+                                                        [(ngModel)]="timeStop"
+                                                        (ngModelChange)="changeTimeStop($event)"
+                                                        nzFormat="HH:mm">
+                                                </nz-time-picker>
                                         </div>
 
                                         <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">

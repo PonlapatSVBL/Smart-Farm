@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { SensorService } from '../services/sensor.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-main',
@@ -18,6 +19,15 @@ export class MainComponent implements OnInit {
   ppfd1st
   ppfd2nd
 
+  dayCheck = {
+    mon: true,
+    tue: true,
+    wed: true,
+    thu: true,
+    fri: true,
+    sat: false,
+    sun: false,
+  }
   timeStart
   timeStop
   valueTimer = 30
@@ -239,6 +249,16 @@ export class MainComponent implements OnInit {
       this.ppfd1st = (value1st.reduce((acc, val) => acc + val, 0) * this.conversion_factor).toFixed(1)
       this.ppfd2nd = (value2nd.reduce((acc, val) => acc + val, 0) * this.conversion_factor).toFixed(1)
 
+      this.dayCheck['mon'] = this.data.day.mon
+      this.dayCheck['tue'] = this.data.day.tue
+      this.dayCheck['wed'] = this.data.day.wed
+      this.dayCheck['thu'] = this.data.day.thu
+      this.dayCheck['fri'] = this.data.day.fri
+      this.dayCheck['sat'] = this.data.day.sat
+      this.dayCheck['sun'] = this.data.day.sun
+      this.timeStart = moment(new Date(this.data.time.start))
+      this.timeStop = moment(new Date(this.data.time.stop))
+      this.valueTimer = this.data.timer
       this.presetSelect = this.data.preset
       this.changePreset(this.presetSelect)
 
@@ -253,13 +273,35 @@ export class MainComponent implements OnInit {
     })
   }
 
+  changeDay() {
+    this._sensorService.setDay(this.dayCheck)
+  }
+
+  changeTimeStart(event) {
+    if (event != null) {
+      let date = moment(new Date(event)).toISOString()
+      let h: number = Number(moment(new Date(event)).format('HH'))
+      let m: number = Number(moment(new Date(event)).format('mm'))
+      this._sensorService.setTimeStart(date, h, m)
+    }
+  }
+
+  changeTimeStop(event) {
+    if (event != null) {
+      let date = moment(new Date(event)).toISOString()
+      let h: number = Number(moment(new Date(event)).format('HH'))
+      let m: number = Number(moment(new Date(event)).format('mm'))
+      this._sensorService.setTimeStop(date, h, m)
+    }
+  }
+
   setTimerDelay(e) {
     this._sensorService.setTimerDelay(e)
   }
 
   setPreset(e) {
     this._sensorService.setPreset(e)
-    this._sensorService.setPPFD(e*20)
+    this._sensorService.setPPFD(e * 20)
   }
 
   chartClicked(e: any): void {
