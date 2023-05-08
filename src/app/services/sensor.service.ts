@@ -10,6 +10,15 @@ export class SensorService {
     public db: AngularFireDatabase,
   ) {}
 
+  getDate() {
+    return this.db.object(`Logs`).valueChanges()
+  }
+
+  getDataLog(date?) {
+    //return this.db.object(`Logs/${date}`).valueChanges()
+    return this.db.object(`Logs/${date}`).query.once("value")
+  }
+
   getAll() {
     return this.db.object('smartFarm').valueChanges()
   }
@@ -50,5 +59,9 @@ export class SensorService {
 
   setPPFD(value: number) {
     return this.db.object('smartFarm').update({ppfd: value}).catch(err => console.log(err))
+  }
+
+  setDLI(value: number) {
+    return this.db.object('smartFarm').update({dliLimit: value}).catch(err => console.log(err))
   }
 }

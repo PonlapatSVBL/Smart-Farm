@@ -1,11 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
+//@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+@font-face {
+        font-family: "Kanit";
+        src: local("Kanit"), url('./assets/Kanit/Kanit-Regular.ttf') format("truetype");
+}
+
+* {
+        font-family: 'Kanit', sans-serif !important;
+}
+
+html,
+body {
         height: 100%;
 }
 
 body {
         margin: 0;
-        font-family: Roboto, "Helvetica Neue", sans-serif;
         background-color: #ecf4f7;
+        //background-color: #f1f1f1;
 }

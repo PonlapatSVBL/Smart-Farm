@@ -1,106 +1,415 @@
 <div id="main" fxFlex>
         <div class="header">
-                <div fxLayoutAlign="center center">
-                        <h1><strong>Smart Farm</strong></h1>
+                <div class="title" fxLayoutAlign="center center">
+                        Smart Farm
                 </div>
         </div>
 
         <div class="content">
                 <mat-tab-group>
                         <!-- @Dashboard -->
-                        <mat-tab label="Dashboard">
+                        <mat-tab>
+                                <ng-template mat-tab-label>
+                                        <div style="font-size: 18px;">
+                                                Dashboard
+                                        </div>
+                                </ng-template>
                                 <div fxFlex fxLayout="column" style="margin-top: 20px;">
                                         <div fxFlex style="margin-left: 50px;">
                                                 <label style="font-size: 17px;">
-                                                        <strong>Preset : {{ presetNameSelect }} ({{ presetPPFDSelect }} PPFD)</strong>
+                                                        <!-- <strong>Preset : {{ presetNameSelect }} ({{ presetPPFDSelect }} PPFD, {{ presetDLISelect }} DLI)</strong> -->
+                                                        <strong>Preset : {{ presetNameSelect }} (PPFD {{ presetPPFDSelect }} µmol/m2/s)</strong>
                                                 </label>
                                         </div>
 
                                         <!-- @Circle Progress -->
                                         <div fxLayout="row" fxLayoutAlign="center start" style="margin-top: 20px;">
-                                                <div fxLayout="column" style="margin: 0px 15px;">
-                                                        <label style="margin-bottom: 10px;">
-                                                                <b>LED Power ({{ ledPower }}%)</b>
-                                                        </label>
-                                                        <nz-progress
-                                                                [nzPercent]="ledPower"
-                                                                nzType="circle"
-                                                                [nzFormat]="formatPercent"
-                                                                [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
-                                                        </nz-progress>
+                                                <div fxLayout="row" style="background-color: #f7f9fa; border-radius: 20px; padding: 20px 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+                                                        <div fxLayout="column" fxLayoutAlign="center center" style="margin: 0px 15px;">
+                                                                <div fxLayout="row" fxLayoutAlign="start center">
+                                                                        <div>
+                                                                                <img src="https://cdn-icons-png.flaticon.com/512/439/439842.png">
+                                                                        </div>
+                                                                        <label>
+                                                                                <b>Shutter Degree</b>
+                                                                        </label>
+                                                                </div>
+                                                                <nz-progress
+                                                                        [nzPercent]="shutterDegree*100/90"
+                                                                        nzType="circle"
+                                                                        [nzFormat]="formatDegree"
+                                                                        [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }"
+                                                                        [nzStrokeWidth]="9">
+                                                                </nz-progress>
+                                                        </div>
+                                                        <div fxLayout="column" fxLayoutAlign="center center" style="margin: 0px 15px;">
+                                                                <div fxLayout="row" fxLayoutAlign="start center">
+                                                                        <div>
+                                                                                <img src="https://images-ext-2.discordapp.net/external/lsgF_asnr7DX5peNvuE6Rmi3uWPae0wDupTbFcwQ0Jw/https/cdn-icons-png.flaticon.com/512/6357/6357876.png">
+                                                                        </div>
+                                                                        <label>
+                                                                                <b>LED Power</b>
+                                                                        </label>
+                                                                </div>
+                                                                <nz-progress
+                                                                        [nzPercent]="ledPower"
+                                                                        nzType="circle"
+                                                                        [nzFormat]="formatPercent"
+                                                                        [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }"
+                                                                        [nzStrokeWidth]="9">
+                                                                </nz-progress>
+                                                        </div>
                                                 </div>
+                                                
+                                                <div fxLayout="row" style="background-color: #f7f9fa; border-radius: 20px; padding: 20px 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); margin: 0px 100px;">
+                                                        <div fxLayout="column" fxLayoutAlign="center center" style="margin: 0px 15px;">
+                                                                <div fxLayout="row" fxLayoutAlign="start center">
+                                                                        <div>
+                                                                                <img src="https://images-ext-2.discordapp.net/external/GWrbowYsc6wsGJYUt8rpTzMahrSs5BLds_kD9M55cwg/https/cdn-icons-png.flaticon.com/512/1684/1684375.png">
+                                                                        </div>
+                                                                        <label>
+                                                                                <b>Temperature</b>
+                                                                        </label>
+                                                                </div>
+                                                                <nz-progress
+                                                                        [nzPercent]="temperature"
+                                                                        nzType="circle"
+                                                                        [nzFormat]="formatCelsius"
+                                                                        [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }"
+                                                                        [nzStrokeWidth]="9">
+                                                                </nz-progress>
+                                                        </div>
+                                                        <div fxLayout="column" fxLayoutAlign="center center" style="margin: 0px 15px;">
+                                                                <div fxLayout="row" fxLayoutAlign="start center">
+                                                                        <div>
+                                                                                <img src="https://images-ext-2.discordapp.net/external/Plxg1jn0ZCBWpeoG0geGjKRiW_GURB-i2F5OCYfmlJw/https/cdn-icons-png.flaticon.com/512/9342/9342439.png">
+                                                                        </div>
+                                                                        <label>
+                                                                                <b>Humidity</b>
+                                                                        </label>
+                                                                </div>
+                                                                <nz-progress
+                                                                        [nzPercent]="humidity"
+                                                                        nzType="circle"
+                                                                        [nzFormat]="formatPercent"
+                                                                        [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }"
+                                                                        [nzStrokeWidth]="9">
+                                                                </nz-progress>
+                                                        </div>
+                                                </div>
+                                                
+                                                <div fxLayout="row" style="background-color: #f7f9fa; border-radius: 20px; padding: 20px 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+                                                        <div fxLayout="column" fxLayoutAlign="center center" style="margin: 0px 15px;">
+                                                                <div fxLayout="row" fxLayoutAlign="start center">
+                                                                        <div>
+                                                                                <img src="https://images-ext-1.discordapp.net/external/YjVuq37pB-MCUFyQwg_BEE5fUEHgrC9yC2TCWKEq0vk/https/cdn-icons-png.flaticon.com/512/6691/6691946.png">
+                                                                        </div>
+                                                                        <label>
+                                                                                <b>Soil moisture 1</b>
+                                                                        </label>
+                                                                </div>
+                                                                <nz-progress
+                                                                        [nzPercent]="soilMoisture1"
+                                                                        nzType="circle"
+                                                                        [nzFormat]="formatPercent"
+                                                                        [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }"
+                                                                        [nzStrokeWidth]="9">
+                                                                </nz-progress>
+                                                        </div>
+                                                        <div fxLayout="column" fxLayoutAlign="center center" style="margin: 0px 15px;">
+                                                                <div fxLayout="row" fxLayoutAlign="start center">
+                                                                        <div>
+                                                                                <img src="https://images-ext-1.discordapp.net/external/YjVuq37pB-MCUFyQwg_BEE5fUEHgrC9yC2TCWKEq0vk/https/cdn-icons-png.flaticon.com/512/6691/6691946.png">
+                                                                        </div>
+                                                                        <label>
+                                                                                <b>Soil moisture 2</b>
+                                                                        </label>
+                                                                </div>
+                                                                <nz-progress
+                                                                        [nzPercent]="soilMoisture2"
+                                                                        nzType="circle"
+                                                                        [nzFormat]="formatPercent"
+                                                                        [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }"
+                                                                        [nzStrokeWidth]="9">
+                                                                </nz-progress>
+                                                        </div>
+                                                </div>
+                                                
+                                        </div>
 
-                                                <div fxLayout="column" style="margin: 0px 15px;">
-                                                        <label style="margin-bottom: 10px;">
-                                                                <b>Shutter Degree ({{ shutterDegree }}°)</b>
-                                                        </label>
-                                                        <nz-progress
-                                                                [nzPercent]="shutterDegree"
-                                                                nzType="circle"
-                                                                [nzFormat]="formatDegree"
-                                                                [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
-                                                        </nz-progress>
+                                        <!-- @Lastest Update -->
+                                        <div fxFlex fxLayoutAlign="center center" style="margin-top: 20px;">
+                                                <h2 style="margin: 0px;">อัพเดทล่าสุด : {{ lastestTime }}</h2>
+                                        </div>
+
+                                        <div fxFlex fxLayout="column" fxLayoutAlign="center center" style="margin-top: 0px;">
+                                                <div fxLayout="row">
+                                                        <h3 style="margin: 0px;">ระดับความชื้นในดินชั้นบน : &nbsp;</h3>
+                                                        <h3 style="margin: 0px;" [ngStyle]="{'color': moistureLevelColor(soilMoisture1)}">{{ moistureAlert(soilMoisture1) }}</h3>
+                                                </div>
+                                                <div fxLayout="row">
+                                                        <h3 style="margin: 0px;">ระดับความชื้นในดินชั้นล่าง : &nbsp;</h3>
+                                                        <h3 style="margin: 0px;" [ngStyle]="{'color': moistureLevelColor(soilMoisture2)}">{{ moistureAlert(soilMoisture2) }}</h3>
+                                                </div>
+                                        </div>
+
+                                        <!-- @Mode -->
+                                        <div fxFlex fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="8px" style="margin-left: 50px;">
+                                                <div fxLayout="column">
+                                                        <label>Mode</label>
+                                                        <!-- <div fxFlex="7">
+                                                                <nz-select [(ngModel)]="mode_selected" style="width: 100%;">
+                                                                        <nz-option *ngFor="let mode of mode_list" [nzValue]="mode.key" [nzLabel]="mode.title"></nz-option>
+                                                                </nz-select>
+                                                        </div> -->
+
+                                                        <nz-radio-group [(ngModel)]="mode_selected" nzButtonStyle="solid" style="width: fit-content;">
+                                                                <div fxLayout="row">
+                                                                        <div nz-radio-button
+                                                                                *ngFor="let mode of mode_list"
+                                                                                [nzValue]="mode.key"
+                                                                                style="width: fit-content;">
+                                                                                {{ mode.title }}
+                                                                        </div>
+                                                                </div>
+                                                        </nz-radio-group>
+                                                </div>
+                                                
+                                                <div style="min-width: 100px;" *ngIf="mode_selected === '02'">
+                                                        <nz-select [(ngModel)]="date" (ngModelChange)="changeDate($event)" style="width: 125px;">
+                                                                <nz-option *ngFor="let item of date_list" [nzValue]="item" [nzLabel]="item"></nz-option>
+                                                        </nz-select>
                                                 </div>
                                         </div>
 
                                         <!-- @Chart -->
-                                        <div fxFlex fxLayout="row" fxLayoutAlign="space-around start"
-                                                style="margin-top: 20px;">
-                                                <div fxFlex fxLayout="column" fxLayoutAlign="start center"
-                                                        style="width: 45%;">
-                                                        <label>
-                                                                <b>PPFD : {{ ppfd1st }} (μmol/m2/s)</b>
-                                                        </label>
-                                                        <div style="width: 100%;">
-                                                                <canvas baseChart
-                                                                        [datasets]="ChartData1st"
-                                                                        [labels]="ChartLabels"
-                                                                        [options]="ChartOptions"
-                                                                        [colors]="ChartColors1st"
-                                                                        [legend]="ChartLegend"
-                                                                        [chartType]="ChartType"
-                                                                        (chartHover)="chartHovered($event)"
-                                                                        (chartClick)="chartClicked($event)">
-                                                                </canvas>
+                                        <!-- Realtime -->
+                                        <ng-container *ngIf="mode_selected === '01'">
+                                                <div fxFlex fxLayout="row" fxLayoutAlign="space-around start"
+                                                        style="margin-top: 20px;">
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>PPFD : {{ ppfd1st }} (μmol/m2/s)</b>
+                                                                </label>
+                                                                <label>
+                                                                        <b>DLI : {{ dli1st }} (μmol/m2/d)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData1st"
+                                                                                [labels]="ChartLabels"
+                                                                                [options]="ChartOptions"
+                                                                                [colors]="ChartColors1st"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
                                                         </div>
-                                                </div>
 
-                                                <div fxFlex fxLayout="column" fxLayoutAlign="start center"
-                                                        style="width: 45%;">
-                                                        <label>
-                                                                <b>PPFD : {{ ppfd2nd }} (μmol/m2/s)</b>
-                                                        </label>
-                                                        <div style="width: 100%;">
-                                                                <canvas baseChart
-                                                                        [datasets]="ChartData2nd"
-                                                                        [labels]="ChartLabels"
-                                                                        [options]="ChartOptions"
-                                                                        [colors]="ChartColors2nd"
-                                                                        [legend]="ChartLegend"
-                                                                        [chartType]="ChartType"
-                                                                        (chartHover)="chartHovered($event)"
-                                                                        (chartClick)="chartClicked($event)">
-                                                                </canvas>
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>PPFD : {{ ppfd2nd }} (μmol/m2/s)</b>
+                                                                </label>
+                                                                <label>
+                                                                        <b>DLI : {{ dli2nd }} (μmol/m2/d)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData2nd"
+                                                                                [labels]="ChartLabels"
+                                                                                [options]="ChartOptions"
+                                                                                [colors]="ChartColors2nd"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
                                                         </div>
                                                 </div>
-                                        </div>
+                                        </ng-container>
+                                        <!-- // Realtime -->
+
+                                        <!-- Log -->
+                                        <ng-container *ngIf="mode_selected === '02'">
+                                                <div fxFlex fxLayout="row" fxLayoutAlign="space-around start"
+                                                        style="margin-top: 20px;">
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>PPFD (μmol/m2/s)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData_PPFD"
+                                                                                [labels]="ChartLabels_logs"
+                                                                                [options]="ChartOptions_PPFD"
+                                                                                [colors]="ChartColorsPPFD_DLI"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
+                                                        </div>
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>DLI (μmol/m2/day)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData_DLI"
+                                                                                [labels]="ChartLabels_logs"
+                                                                                [options]="ChartOptions_DLI"
+                                                                                [colors]="ChartColorsPPFD_DLI"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
+                                                        </div>
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>LED Power (%)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData_ledPower"
+                                                                                [labels]="ChartLabels_logs"
+                                                                                [options]="ChartOptions_percent"
+                                                                                [colors]="ChartColors1st"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
+                                                        </div>
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>Shutter Degree (°)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData_shutterDegree"
+                                                                                [labels]="ChartLabels_logs"
+                                                                                [options]="ChartOptions_percent"
+                                                                                [colors]="ChartColors2nd"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <!-- <div fxFlex fxLayout="row" fxLayoutAlign="space-around start"
+                                                        style="margin-top: 20px;">
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>Humidity (%)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData_humidity"
+                                                                                [labels]="ChartLabels_logs"
+                                                                                [options]="ChartOptions_percent"
+                                                                                [colors]="ChartColors1st"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
+                                                        </div>
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>Temperature (°c)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData_temperature"
+                                                                                [labels]="ChartLabels_logs"
+                                                                                [options]="ChartOptions_percent"
+                                                                                [colors]="ChartColors2nd"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
+                                                        </div>
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>Soil moisture ชั้น 1 (%)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData_soilMoisture1"
+                                                                                [labels]="ChartLabels_logs"
+                                                                                [options]="ChartOptions_soilmoisture"
+                                                                                [colors]="ChartColors1st"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
+                                                        </div>
+                                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center"
+                                                                style="width: 45%;">
+                                                                <label>
+                                                                        <b>Soil moisture ชั้น 2 (%)</b>
+                                                                </label>
+                                                                <div style="width: 100%;">
+                                                                        <canvas baseChart
+                                                                                [datasets]="ChartData_soilMoisture2"
+                                                                                [labels]="ChartLabels_logs"
+                                                                                [options]="ChartOptions_soilmoisture"
+                                                                                [colors]="ChartColors2nd"
+                                                                                [legend]="ChartLegend"
+                                                                                [chartType]="ChartType"
+                                                                                (chartHover)="chartHovered($event)"
+                                                                                (chartClick)="chartClicked($event)">
+                                                                        </canvas>
+                                                                </div>
+                                                        </div>
+                                                </div> -->
+                                        </ng-container>
+                                        <!-- // Log -->
                                 </div>
                         </mat-tab>
 
                         <!-- @Config -->
-                        <mat-tab label="Config">
+                        <mat-tab>
+                                <ng-template mat-tab-label>
+                                        <div style="font-size: 18px;">
+                                                Config
+                                        </div>
+                                </ng-template>
                                 <div fxFlex fxLayout="column" fxLayoutAlign="start start" style="margin: 20px 50px 0px 50px;">
                                         <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
                                                 <label style="margin-right: 10px;">
                                                         <strong>Days : </strong>
                                                 </label>
-                                                <label nz-checkbox [(ngModel)]="dayCheck.mon" (ngModelChange)="changeDay()">Monday</label>
-                                                <label nz-checkbox [(ngModel)]="dayCheck.tue" (ngModelChange)="changeDay()">Tuesday</label>
-                                                <label nz-checkbox [(ngModel)]="dayCheck.wed" (ngModelChange)="changeDay()">Wednesday</label>
-                                                <label nz-checkbox [(ngModel)]="dayCheck.thu" (ngModelChange)="changeDay()">Thursday</label>
-                                                <label nz-checkbox [(ngModel)]="dayCheck.fri" (ngModelChange)="changeDay()">Friday</label>
-                                                <label nz-checkbox [(ngModel)]="dayCheck.sat" (ngModelChange)="changeDay()">Saturday</label>
-                                                <label nz-checkbox [(ngModel)]="dayCheck.sun" (ngModelChange)="changeDay()">Sunday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.mon" (ngModelChange)="changeDay()" disabled>Monday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.tue" (ngModelChange)="changeDay()" disabled>Tuesday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.wed" (ngModelChange)="changeDay()" disabled>Wednesday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.thu" (ngModelChange)="changeDay()" disabled>Thursday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.fri" (ngModelChange)="changeDay()" disabled>Friday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.sat" (ngModelChange)="changeDay()" disabled>Saturday</label>
+                                                <label nz-checkbox [(ngModel)]="dayCheck.sun" (ngModelChange)="changeDay()" disabled>Sunday</label>
                                         </div>
 
                                         <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
@@ -110,7 +419,8 @@
                                                 <nz-time-picker
                                                         [(ngModel)]="timeStart"
                                                         (ngModelChange)="changeTimeStart($event)"
-                                                        nzFormat="HH:mm">
+                                                        nzFormat="HH:mm"
+                                                        nzDisabled>
                                                 </nz-time-picker>
                                         </div>
 
@@ -121,7 +431,8 @@
                                                 <nz-time-picker
                                                         [(ngModel)]="timeStop"
                                                         (ngModelChange)="changeTimeStop($event)"
-                                                        nzFormat="HH:mm">
+                                                        nzFormat="HH:mm"
+                                                        nzDisabled>
                                                 </nz-time-picker>
                                         </div>
 
@@ -134,7 +445,8 @@
                                                         (ngModelChange)="setTimerDelay($event)"
                                                         [nzMin]="1"
                                                         [nzMax]="120"
-                                                        style="min-width: 300px; max-width: 500px;">
+                                                        style="min-width: 300px; max-width: 500px;"
+                                                        nzDisabled>
                                                 </nz-slider>
                                         </div>
 
@@ -142,14 +454,22 @@
                                                 <label style="margin-right: 10px;">
                                                         <strong>Preset : </strong>
                                                 </label>
-                                                <nz-tree-select
+                                                <!-- <nz-tree-select
                                                         [nzNodes]="nodes"
                                                         [(ngModel)]="presetSelect"
                                                         (ngModelChange)="setPreset($event)"
                                                         (ngModelChange)="changePreset($event)"
-                                                        nzShowSearch nzPlaceHolder="Please select"
+                                                        [nzAllowClear]="false"
+                                                        nzPlaceHolder="Please select"
                                                         style="min-width: 300px; max-width: 500px;">
-                                                </nz-tree-select>
+                                                </nz-tree-select> -->
+                                                <nz-select [(ngModel)]="presetSelect"
+                                                        (ngModelChange)="setPreset($event); changePreset($event)"
+                                                        [nzAllowClear]="false"
+                                                        nzPlaceHolder="Please select"
+                                                        style="min-width: 300px; max-width: 500px;">
+                                                        <nz-option *ngFor="let preset of nodes" [nzValue]="preset.key" [nzLabel]="preset.title"></nz-option>
+                                                </nz-select>
                                         </div>
 
                                 </div>

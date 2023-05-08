@@ -13,7 +13,6 @@ import en from '@angular/common/locales/en';
 import { MainComponent } from './main/main.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChartsModule } from 'ng2-charts';
-/* import { ChartsModule } from 'ng2-charts/lib/charts.module'; */
 
 import { MatTabsModule } from '@angular/material/tabs';
 
@@ -22,15 +21,15 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
-
-/* import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database'; */
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { environment } from 'src/environments/environment';
-
 
 registerLocaleData(en);
 
@@ -54,12 +53,13 @@ registerLocaleData(en);
     NzSliderModule,
     NzTreeSelectModule,
     NzTimePickerModule,
-
-    /* AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule, */
+    NzSwitchModule,
+    NzSelectModule,
+    NzRadioModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     
   ],
   providers: [
